@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titulo %}Início{% endblock %}</title>
+</head>
+<body>
+    <h1>Bem-vindo ao Gerenciador de Tarefas!</h1>
+    <p>Escolha uma das opções abaixo:</p>
+    <ul>
+        <li><a href="/user/Rodrigo">Ver perfil de Rodrigo Souza</a></li>
+        <li><a href="/post/42">Ler postagem #42</a></li>
+        <li><a href="/Tarefa">Tarefa</a></li>
+        <li><a href="/criar-conta">Criar Conta</a></li>
+    </ul>
+
+    {% block formulario %}
+    <form method="POST">
+        {{ form.csrf_token }}
+
+        {{ form.email.label }}
+        {{ form.email() }}
+
+        {{ form.senha.label }}
+        {{ form.senha() }}
+
+        {{ form.botao_confirmacao() }}
+    </form>
+    {% endblock %}
+</body>
+</html>

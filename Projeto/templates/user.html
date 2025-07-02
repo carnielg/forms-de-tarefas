@@ -1,0 +1,42 @@
+{% extends "home.html" %}
+
+{% block titulo %}
+Perfil de {{ usuario.nome }}
+{% endblock %}
+
+{% block formulario %}
+<h2>Perfil de {{ usuario.nome }}</h2>
+<p>Email: {{ usuario.email }}</p>
+
+<hr>
+<h3>Criar nova tarefa:</h3>
+<form method="POST">
+    {{ form.csrf_token }}
+
+    {{ form.titulo.label }}<br>
+    {{ form.titulo(size=40) }}<br><br>
+
+    {{ form.categoria.label }}<br>
+    {{ form.categoria() }}<br><br>
+
+    {{ form.botao_confirmacao() }}
+</form>
+
+<hr>
+<h3>Tarefas de {{ usuario.nome }}:</h3>
+<ul>
+{% for tarefa in usuario.tarefas %}
+    <li>
+        {{ tarefa.titulo }}
+        {% if tarefa.categoria %}
+            (Categoria: {{ tarefa.categoria.nome }})
+        {% else %}
+            (Sem categoria)
+        {% endif %}
+    </li>
+{% else %}
+    <li>Nenhuma tarefa cadastrada.</li>
+{% endfor %}
+</ul>
+<a href="/">Voltar ao início</a>
+{% endblock %}
